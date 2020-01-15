@@ -24,7 +24,7 @@ public class File {
     public String getFile_path(){
         return file_path;
     }
-    public void setGFile_path(String file_path){
+    public void setFile_path(String file_path){
         this.file_path=file_path;
     }
 
@@ -38,7 +38,7 @@ public class File {
    public Date getEnd_time(){
         return end_time;
     }
-   public void setTEnd_time(Date end_time){
+   public void setEnd_time(Date end_time){
         this.end_time=end_time;
     }
 
