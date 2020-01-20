@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="AndunaEchoMedia" target="1.8" />
+      <module name="AndunaEchoMedia" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
