@@ -1,7 +1,4 @@
 package lk.andunaechomedia.models;
-
-import org.springframework.data.repository.cdi.Eager;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -13,7 +10,7 @@ public class Main_schedule implements Serializable{
     @Id
     @Column(name = "schedule_id")
     String schedule_id;
-    String version;
+    double version;
 
     @ManyToMany
     @JoinTable(name = "main_schedule_has_file", joinColumns = {@JoinColumn(name = "schedule_id",referencedColumnName = "schedule_id")}, inverseJoinColumns = {@JoinColumn(name = "file_id",referencedColumnName = "file_id")})
@@ -38,13 +35,14 @@ public class Main_schedule implements Serializable{
         this.schedule_id=schedule_id;
     }
 
-    public String getVersion() {
+    public double getVersion() {
 
         return version;
     }
     public void setVersion(String version){
 
-        this.version=version;
+        this.version=Double.parseDouble(version);
    }
+
 
 }

@@ -21,8 +21,7 @@ public class DeviceController {
     }
 
     @RequestMapping("/get/device/{id}")
-    public @ResponseBody
-    Optional<Device> getOne(@PathVariable String id){
+    public @ResponseBody Optional<Device> getOne(@PathVariable String id){
         return deviceRepo.findById(id);
     }
 
