@@ -10,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "file")
-@ConfigurationProperties(prefix = "file")
 public class File implements Serializable {
     @Id
     @Column(name = "file_id")
