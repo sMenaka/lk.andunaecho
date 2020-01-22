@@ -1,5 +1,6 @@
 package lk.andunaechomedia.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
@@ -11,6 +12,9 @@ import java.util.Set;
 @Entity
 @Table(name = "file")
 public class File implements Serializable {
+
+
+
     @Id
     @Column(name = "file_id")
     String file_id;
@@ -19,9 +23,11 @@ public class File implements Serializable {
     Date end_time;//time
 
     @ManyToMany(mappedBy = "file")
+    @JsonBackReference
     Set<Main_schedule> mainSchedule;
 
     @ManyToMany(mappedBy = "file")
+    @JsonBackReference
     Set<Temp_schedule> tempSchedule;
 
     public Set<Temp_schedule> getTempSchedule() {

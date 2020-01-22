@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface DeviceRepo extends CrudRepository<Device,String> {
 
+
 }

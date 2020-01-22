@@ -1,4 +1,6 @@
 package lk.andunaechomedia.models;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -9,12 +11,24 @@ public class Main_schedule implements Serializable{
 
     @Id
     @Column(name = "schedule_id")
-    String schedule_id;
-    double version;
+    private String schedule_id;
+    private double version;
 
     @ManyToMany
     @JoinTable(name = "main_schedule_has_file", joinColumns = {@JoinColumn(name = "schedule_id",referencedColumnName = "schedule_id")}, inverseJoinColumns = {@JoinColumn(name = "file_id",referencedColumnName = "file_id")})
-    Set<File> file;
+    @JsonManagedReference
+    private Set<File> file;
+    @OneToMany(mappedBy = "main_schedule")
+    @JsonManagedReference
+    private Set<Device_group> groups;
+
+    public Set<File> getFile() {
+        return file;
+    }
+
+    public void setFile(Set<File> file) {
+        this.file = file;
+    }
 
     public Set<File> getMainScheduleData() {
         return file;

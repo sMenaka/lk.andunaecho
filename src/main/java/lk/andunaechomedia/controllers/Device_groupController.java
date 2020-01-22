@@ -13,15 +13,10 @@ public class Device_groupController {
     private Device_groupRepo device_groupRepo;
 
     @RequestMapping(method = RequestMethod.POST, value = "/add/device_group")
-    public @ResponseBody
-    String addGroup(@RequestBody Device_group device_group){
-        Device_group tempDevice_group = device_groupRepo.findById(device_group.getGroup_id()).get();
-        if (device_group != null){
-            System.out.println(device_group.getGroup_name());
-            device_groupRepo.save(device_group);
-            return "Group Created";
-        }
-        return "Group Creation Failed";
+    public @ResponseBody String addGroup(@RequestBody Device_group  group){
+
+
+        return "ok";
     }
 
     @RequestMapping(method = RequestMethod.GET,path = "get/devices/from/group/{group_name}")

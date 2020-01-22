@@ -4,8 +4,12 @@ import jdk.nashorn.internal.runtime.options.Option;
 import lk.andunaechomedia.models.Device;
 import lk.andunaechomedia.repositories.DeviceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
+import javax.validation.Valid;
+import java.awt.*;
 import java.util.Optional;
 
 @RestController
@@ -22,11 +26,12 @@ public class DeviceController {
 
     @RequestMapping("/get/device/{id}")
     public @ResponseBody Optional<Device> getOne(@PathVariable String id){
-        return deviceRepo.findById(id);
+        System.out.println(deviceRepo.findById("bus001"));
+        return deviceRepo.findById("bus001");
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/add/device")
-    public @ResponseBody String addDevice(@RequestBody Device device){
+    public @ResponseBody String addDevice(@Valid @RequestBody Device device){
         System.out.println(device.getPublish_date());
         deviceRepo.save(device);
         return "Saved";

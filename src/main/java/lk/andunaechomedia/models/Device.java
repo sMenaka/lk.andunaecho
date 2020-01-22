@@ -1,21 +1,30 @@
 package lk.andunaechomedia.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
 import java.util.Date;
-import lk.andunaechomedia.repositories.DeviceRepo;
+
 
 @Entity
 public  class Device {
     @Id
-    String device_id;
-    String customer_name;
-    String start_point;
-    String end_point;
-    String device_address;
-    String tel_number;
-    Date   publish_date;
-
+    private String device_id;
+    private String customer_name;
+    private String start_point;
+    private String end_point;
+    private String device_address;
+    private String tel_number;
+    private Date   publish_date;
+    @ManyToOne
+    @JoinColumn(name="device_group_group_id", nullable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="device_id")
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonProperty("group_id")
+    private Device_group device_group;
 
     public Device() {
     }
@@ -29,6 +38,14 @@ public  class Device {
         this.setTel_number(tel_number);
         this.setPublish_date(publish_date);
 
+    }
+
+    public Device_group getDevice_group() {
+        return device_group;
+    }
+
+    public void setDevice_group(Device_group device_group) {
+        this.device_group = device_group;
     }
 
     public String getDevice_id() {
