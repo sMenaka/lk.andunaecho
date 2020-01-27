@@ -1,3 +1,4 @@
+/*
 package lk.andunaechomedia.controllers;
 
 import lk.andunaechomedia.models.Temp_schedule;
@@ -38,3 +39,4 @@ public class Temp_scheduleController {
         return "Temp schedule upload Successfully...!";
     }
 }
+*/

@@ -1,9 +1,8 @@
 package lk.andunaechomedia.repositories;
 
 import lk.andunaechomedia.models.File;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FileRepo extends CrudRepository<File,String> {
-
+public interface FileRepo extends JpaRepository<File,String> {
 
 }

@@ -1,22 +1,20 @@
 package lk.andunaechomedia.controllers;
 
-import jdk.nashorn.internal.runtime.options.Option;
 import lk.andunaechomedia.models.Device;
 import lk.andunaechomedia.repositories.DeviceRepo;
+import lk.andunaechomedia.repositories.DeviceGroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
-import java.awt.*;
-import java.util.Optional;
 
 @RestController
-public class DeviceController {
+public class DeviceController  {
 
     @Autowired
     private DeviceRepo deviceRepo;
+    @Autowired
+    private DeviceGroupRepo device_groupRepo;
 
     @RequestMapping("/get/device/all")
     public @ResponseBody Iterable<Device> getAll(){
@@ -25,27 +23,29 @@ public class DeviceController {
     }
 
     @RequestMapping("/get/device/{id}")
-    public @ResponseBody Optional<Device> getOne(@PathVariable String id){
-        System.out.println(deviceRepo.findById("bus001"));
-        return deviceRepo.findById("bus001");
+    public @ResponseBody
+    Device getOne(@PathVariable String id){
+        Device device=deviceRepo.findById(id).get();
+        return device;
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/add/device")
     public @ResponseBody String addDevice(@Valid @RequestBody Device device){
-        System.out.println(device.getPublish_date());
+        System.out.println(device_groupRepo.findById(device.getDeviceGroup().getGroupId()).get().getGroupName());
+        device.setDeviceGroup(device_groupRepo.findById(device.getDeviceGroup().getGroupId()).get());
         deviceRepo.save(device);
         return "Saved";
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/update/device")
     public @ResponseBody String updateDevice(@RequestBody Device device){
-       Device updateDevice=deviceRepo.findById(device.getDevice_id()).get();
-       updateDevice.setPublish_date(device.getPublish_date());
-       updateDevice.setCustomer_name(device.getCustomer_name());
-       updateDevice.setTel_number(device.getTel_number());
-       updateDevice.setDevice_address(device.getDevice_address());
-       updateDevice.setEnd_point(device.getEnd_point());
-       updateDevice.setStart_point(device.getStart_point());
+       Device updateDevice=deviceRepo.findById(device.getDeviceId()).get();
+       updateDevice.setPublishDate(device.getPublishDate());
+       updateDevice.setCustomerName(device.getCustomerName());
+       updateDevice.setTelNumber(device.getTelNumber());
+       updateDevice.setDeviceAddress(device.getDeviceAddress());
+       updateDevice.setEndPoint(device.getEndPoint());
+       updateDevice.setStartPoint(device.getStartPoint());
        try {
            deviceRepo.save(updateDevice);
            return "upload successful";

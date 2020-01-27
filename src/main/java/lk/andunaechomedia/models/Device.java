@@ -1,107 +1,109 @@
 package lk.andunaechomedia.models;
 
-import com.fasterxml.jackson.annotation.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity
-public  class Device {
+@Table(name = "device")
+public  class Device implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
-    private String device_id;
-    private String customer_name;
-    private String start_point;
-    private String end_point;
-    private String device_address;
-    private String tel_number;
-    private Date   publish_date;
-    @ManyToOne
-    @JoinColumn(name="device_group_group_id", nullable=false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="device_id")
-    @JsonIdentityReference(alwaysAsId=true)
-    @JsonProperty("group_id")
-    private Device_group device_group;
+    private String deviceId;
+    private String customerName;
+    private String startPoint;
+    private String endPoint;
+    private String deviceAddress;
+    private String telNumber;
+    Date publishDate;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "device_group_group_id")
+    private DeviceGroup deviceGroup;
 
     public Device() {
     }
 
     public Device(String device_id,String customer_name,String start_point, String end_points, String device_address, String tel_number, Date publish_date) {
-        this.setDevice_id(device_id);
-        this.setCustomer_name(customer_name);
-        this.setStart_point(start_point);
-        this.setEnd_point(end_points);
-        this.setDevice_address(device_address);
-        this.setTel_number(tel_number);
-        this.setPublish_date(publish_date);
+        this.setDeviceId(device_id);
+        this.setCustomerName(customer_name);
+        this.setStartPoint(start_point);
+        this.setEndPoint(end_points);
+        this.setDeviceAddress(device_address);
+        this.setTelNumber(tel_number);
+        this.setPublishDate(publish_date);
 
     }
 
-    public Device_group getDevice_group() {
-        return device_group;
+    public DeviceGroup getDeviceGroup() {
+        return deviceGroup;
     }
 
-    public void setDevice_group(Device_group device_group) {
-        this.device_group = device_group;
+    public void setDeviceGroup(DeviceGroup device_group) {
+        this.deviceGroup = device_group;
     }
 
-    public String getDevice_id() {
-        return device_id;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setDevice_id(String device_id) {
-        this.device_id = device_id;
+    public void setDeviceId(String device_id) {
+        this.deviceId = device_id;
     }
 
-    public String getCustomer_name() {
-        return customer_name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustomer_name(String customer_name) {
-        this.customer_name = customer_name;
+    public void setCustomerName(String customer_name) {
+        this.customerName = customer_name;
     }
 
-    public String getStart_point() {
-        return start_point;
+    public String getStartPoint() {
+        return startPoint;
     }
 
-    public void setStart_point(String start_point) {
-        this.start_point = start_point;
+    public void setStartPoint(String start_point) {
+        this.startPoint = start_point;
     }
 
-    public String getEnd_point() {
-        return end_point;
+    public String getEndPoint() {
+        return endPoint;
     }
 
-    public void setEnd_point(String end_point) {
-        this.end_point = end_point;
+    public void setEndPoint(String end_point) {
+        this.endPoint = end_point;
     }
 
-    public String getDevice_address() {
-        return device_address;
+    public String getDeviceAddress() {
+        return deviceAddress;
     }
 
-    public void setDevice_address(String address) {
-        this.device_address = address;
+    public void setDeviceAddress(String address) {
+        this.deviceAddress = address;
     }
 
-    public String getTel_number() {
-        return tel_number;
+    public String getTelNumber() {
+        return telNumber;
     }
 
-    public void setTel_number(String telphone) {
-        this.tel_number = telphone;
+    public void setTelNumber(String telphone) {
+        this.telNumber = telphone;
     }
 
-    public Date getPublish_date() {
-        return publish_date;
+    public Date getPublishDate() {
+        return publishDate;
     }
 
-    public void setPublish_date(Date publish_date) {
-        this.publish_date = publish_date;
+    public void setPublishDate(Date publish_date) {
+        this.publishDate = publish_date;
     }
 
     /*public void updatePartial(Device device, String deice_id){

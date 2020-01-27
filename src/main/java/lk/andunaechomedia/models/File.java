@@ -1,8 +1,7 @@
 package lk.andunaechomedia.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,38 +11,42 @@ import java.util.Set;
 @Entity
 @Table(name = "file")
 public class File implements Serializable {
+    public File() {
+    }
 
+    public File(String file_id) {
+        this.file_id=file_id;
+    }
 
+    private static  final long serialVersionUID=1L;
 
     @Id
-    @Column(name = "file_id")
     String file_id;
     String file_path;
     Date start_time;//time
     Date end_time;//time
+    @JsonBackReference(value = "MainScheduleHasFile-File")
+    @OneToMany(mappedBy = "file",cascade = {CascadeType.ALL})
+    Set<MainScheduleHasFile> mainScheduleHasFiles;
+    @JsonBackReference(value = "TempScheduleHasFile-File")
+    @OneToMany(mappedBy = "file",cascade = {CascadeType.ALL})
+    Set<TempScheduleHasFile> tempScheduleHasFiles;
 
-    @ManyToMany(mappedBy = "file")
-    @JsonBackReference
-    Set<Main_schedule> mainSchedule;
 
-    @ManyToMany(mappedBy = "file")
-    @JsonBackReference
-    Set<Temp_schedule> tempSchedule;
-
-    public Set<Temp_schedule> getTempSchedule() {
-        return tempSchedule;
+    public Set<TempScheduleHasFile> getTempScheduleHasFiles() {
+        return tempScheduleHasFiles;
     }
 
-    public void setTempSchedule(Set<Temp_schedule> tempSchedule) {
-        this.tempSchedule = tempSchedule;
+    public void setTempScheduleHasFiles(Set<TempScheduleHasFile> tempScheduleHasFiles) {
+        this.tempScheduleHasFiles = tempScheduleHasFiles;
     }
 
-    public Set<Main_schedule> getMainSchedule() {
-        return mainSchedule;
+    public Set<MainScheduleHasFile> getMainScheduleHasFiles() {
+        return mainScheduleHasFiles;
     }
 
-    public void setMainSchedule(Set<Main_schedule> mainSchedule) {
-        this.mainSchedule = mainSchedule;
+    public void setMainScheduleHasFiles(Set<MainScheduleHasFile> mainSchedule) {
+        this.mainScheduleHasFiles = mainSchedule;
     }
 
     public String getFile_id(){
