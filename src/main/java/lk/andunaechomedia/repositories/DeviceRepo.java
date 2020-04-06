@@ -1,8 +1,11 @@
 package lk.andunaechomedia.repositories;
 
 import lk.andunaechomedia.models.Device;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface DeviceRepo extends CrudRepository<Device,String> {
+@Repository
+public interface DeviceRepo extends JpaRepository<Device,String> {
+
 
 }

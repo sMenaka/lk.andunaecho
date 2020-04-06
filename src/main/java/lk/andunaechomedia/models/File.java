@@ -27,26 +27,26 @@ public class File implements Serializable {
     Date end_time;//time
     @JsonBackReference(value = "MainScheduleHasFile-File")
     @OneToMany(mappedBy = "file",cascade = {CascadeType.ALL})
-    Set<MainScheduleHasFile> mainScheduleHasFiles;
-    @JsonBackReference(value = "TempScheduleHasFile-File")
-    @OneToMany(mappedBy = "file",cascade = {CascadeType.ALL})
-    Set<TempScheduleHasFile> tempScheduleHasFiles;
+    Set<MainSchedulePlayFile> mainSchedulePlayFiles;
+//    @JsonBackReference(value = "TempScheduleHasFile-File")
+//    @OneToMany(mappedBy = "file",cascade = {CascadeType.ALL})
+//    Set<TempScheduleHasFile> tempScheduleHasFiles;
+//
+//
+//    public Set<TempScheduleHasFile> getTempScheduleHasFiles() {
+//        return tempScheduleHasFiles;
+//    }
+//
+//    public void setTempScheduleHasFiles(Set<TempScheduleHasFile> tempScheduleHasFiles) {
+//        this.tempScheduleHasFiles = tempScheduleHasFiles;
+//    }
 
-
-    public Set<TempScheduleHasFile> getTempScheduleHasFiles() {
-        return tempScheduleHasFiles;
+    public Set<MainSchedulePlayFile> getMainSchedulePlayFiles() {
+        return mainSchedulePlayFiles;
     }
 
-    public void setTempScheduleHasFiles(Set<TempScheduleHasFile> tempScheduleHasFiles) {
-        this.tempScheduleHasFiles = tempScheduleHasFiles;
-    }
-
-    public Set<MainScheduleHasFile> getMainScheduleHasFiles() {
-        return mainScheduleHasFiles;
-    }
-
-    public void setMainScheduleHasFiles(Set<MainScheduleHasFile> mainSchedule) {
-        this.mainScheduleHasFiles = mainSchedule;
+    public void setMainSchedulePlayFiles(Set<MainSchedulePlayFile> mainSchedule) {
+        this.mainSchedulePlayFiles = mainSchedule;
     }
 
     public String getFile_id(){

@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 
 @RestController
 public class FileController {
@@ -25,8 +22,12 @@ public class FileController {
 public String fileUpload(@RequestParam MultipartFile file, @RequestParam String fileId){
     File saveFile=new File();
     saveFile.setFile_id(fileId);
+    Path path=null;
     String filename= StringUtils.cleanPath(file.getOriginalFilename());
-    Path path= Paths.get("/andunaEcho/files/"+filename);
+    if(!(new java.io.File(System.getProperty("user.home")+"/andunaEcho/files").exists())){
+        new java.io.File(System.getProperty("user.home")+"/andunaEcho/files").mkdirs();
+    }
+    path=Paths.get(System.getProperty("user.home")+"/andunaEcho/files/"+filename);
     saveFile.setFile_path(path.toString());
     repo.save(saveFile);
     try {
@@ -34,8 +35,9 @@ public String fileUpload(@RequestParam MultipartFile file, @RequestParam String 
     }
 
     catch (IOException e){
-        System.out.println("sfdsagdgffgdsgsdgsdgfsfvfsdfsd");
+        System.out.println(e);
     }
+
 
 return "ok";
 }
