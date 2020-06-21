@@ -8,7 +8,6 @@ public class GroupMapper {
         DeviceGroup group=new DeviceGroup();
         group.setGroupId(groupDto.getGroupId());
         group.setGroupName(groupDto.getName());
-
         return    group;
     }
 }
