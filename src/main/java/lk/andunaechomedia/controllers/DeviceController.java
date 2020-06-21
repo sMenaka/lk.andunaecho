@@ -2,19 +2,15 @@ package lk.andunaechomedia.controllers;
 
 import lk.andunaechomedia.models.Device;
 import lk.andunaechomedia.repositories.DeviceRepo;
-import lk.andunaechomedia.repositories.DeviceGroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 public class DeviceController  {
 
     @Autowired
     private DeviceRepo deviceRepo;
-    @Autowired
-    private DeviceGroupRepo device_groupRepo;
+
 
     @RequestMapping(method=RequestMethod.GET,value = "/get/device/all")
     public @ResponseBody Iterable<Device> getAll(){
@@ -29,13 +25,11 @@ public class DeviceController  {
         return device;
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/add/device")
-    public @ResponseBody String addDevice( @RequestBody Device device){
-        System.out.println(device_groupRepo.findById(device.getDeviceGroup().getGroupId()).get().getGroupName());
-        device.setDeviceGroup(device_groupRepo.findById(device.getDeviceGroup().getGroupId()).get());
-        deviceRepo.save(device);
-        return "Saved";
-    }
+//    @RequestMapping(method = RequestMethod.POST,value = "/add/device")
+//    public @ResponseBody
+//    HttpEntity <Device> addDevice(@RequestBody Device group){
+//        return new HttpEntity<Device>() ;
+//    }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/update/device")
     public @ResponseBody String updateDevice(@RequestBody Device device){

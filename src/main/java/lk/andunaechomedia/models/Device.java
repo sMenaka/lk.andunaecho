@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +14,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "device")
+@Getter
+@Setter
 public  class Device implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,7 +29,7 @@ public  class Device implements Serializable {
     Date publishDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "device_group_group_id")
+    @JoinColumn(name = "device_group_id")
     private DeviceGroup deviceGroup;
 
     public Device() {
@@ -40,70 +44,6 @@ public  class Device implements Serializable {
         this.setTelNumber(tel_number);
         this.setPublishDate(publish_date);
 
-    }
-
-    public DeviceGroup getDeviceGroup() {
-        return deviceGroup;
-    }
-
-    public void setDeviceGroup(DeviceGroup device_group) {
-        this.deviceGroup = device_group;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String device_id) {
-        this.deviceId = device_id;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customer_name) {
-        this.customerName = customer_name;
-    }
-
-    public String getStartPoint() {
-        return startPoint;
-    }
-
-    public void setStartPoint(String start_point) {
-        this.startPoint = start_point;
-    }
-
-    public String getEndPoint() {
-        return endPoint;
-    }
-
-    public void setEndPoint(String end_point) {
-        this.endPoint = end_point;
-    }
-
-    public String getDeviceAddress() {
-        return deviceAddress;
-    }
-
-    public void setDeviceAddress(String address) {
-        this.deviceAddress = address;
-    }
-
-    public String getTelNumber() {
-        return telNumber;
-    }
-
-    public void setTelNumber(String telphone) {
-        this.telNumber = telphone;
-    }
-
-    public Date getPublishDate() {
-        return publishDate;
-    }
-
-    public void setPublishDate(Date publish_date) {
-        this.publishDate = publish_date;
     }
 
     /*public void updatePartial(Device device, String deice_id){

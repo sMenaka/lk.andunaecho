@@ -23,8 +23,7 @@ public class File implements Serializable {
     @Id
     String file_id;
     String file_path;
-    Date start_time;//time
-    Date end_time;//time
+
     @JsonBackReference(value = "MainScheduleHasFile-File")
     @OneToMany(mappedBy = "file",cascade = {CascadeType.ALL})
     Set<MainSchedulePlayFile> mainSchedulePlayFiles;
@@ -65,22 +64,6 @@ public class File implements Serializable {
         this.file_path=file_path;
     }
 
-    public Date getStart_time(){
 
-        return start_time;
-    }
-    public void setStart_time(Date start_time){
-
-        this.start_time=start_time;
-    }
-
-   public Date getEnd_time(){
-
-        return end_time;
-    }
-   public void setEnd_time(Date end_time){
-
-        this.end_time=end_time;
-    }
 
 }

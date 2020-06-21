@@ -1,6 +1,8 @@
 package lk.andunaechomedia.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,7 +10,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "device_group")
-
+@Getter
+@Setter
 public class DeviceGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,33 +48,7 @@ public class DeviceGroup implements Serializable {
 //        this.tempSchedule = tempSchedule;
 //    }
 
-    public MainSchedule getMainSchedule() {
-        return mainSchedule;
-    }
 
-    public void setMainSchedule(MainSchedule mainSchedule) {
-        this.mainSchedule = mainSchedule;
-    }
-
-    public Set<Device> getDevices() {
-        return devices;
-    }
-
-    public void setDevices(Set<Device> devices) {
-        this.devices = devices;
-    }
-
-    public String getGroupId(){ return groupId; }
-    public void setGroupId(String group_id){
-        this.groupId =group_id;
-    }
-
-    public String getGroupName(){
-        return groupName;
-    }
-    public void setGroupName(String group_name){
-        this.groupName =group_name;
-    }
 
 
 }
