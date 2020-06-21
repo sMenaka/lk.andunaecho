@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import java.util.Optional;
 
+import lk.andunaechomedia.dtos.SaveScheduleDto;
 import lk.andunaechomedia.models.DeviceGroup;
 import lk.andunaechomedia.models.File;
 import lk.andunaechomedia.models.MainSchedule;
@@ -12,7 +13,12 @@ import lk.andunaechomedia.models.MainSchedulePlayFile;
 import lk.andunaechomedia.repositories.DeviceGroupRepo;
 import lk.andunaechomedia.repositories.FileRepo;
 import lk.andunaechomedia.repositories.MainScheduleRepo;
+import lk.andunaechomedia.services.MainScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +36,13 @@ public class MainScheduleController {
     @Autowired
     FileRepo fileRepo;
 
+    @Autowired
+    MainScheduleService scheduleService;
+
 
     @RequestMapping(method = {RequestMethod.POST}, path = {"/add/main_schedule"})
-    public String main_schedule_upload(@RequestBody MainSchedule main_schedule) {
-        this.mainScheduleRepo.save(main_schedule);
-        return "Main schedule Upload Successfully...!";
+    public HttpEntity<SaveScheduleDto> mainScheduleUpload(@RequestBody SaveScheduleDto main_schedule) {
+        return new ResponseEntity(scheduleService.save(main_schedule), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = {RequestMethod.POST}, path = {"/add/main_schedule/videos/{groupid}"})

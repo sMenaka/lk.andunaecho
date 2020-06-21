@@ -8,4 +8,5 @@ import lombok.Setter;
 public class SaveGroupDto {
 private String groupId;
 private String name;
+private String scheduleId;
 }

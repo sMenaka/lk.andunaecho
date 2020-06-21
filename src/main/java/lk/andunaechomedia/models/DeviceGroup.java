@@ -26,13 +26,13 @@ public class DeviceGroup implements Serializable {
     @Id
     private String groupId;
     private String groupName;
-    @JsonBackReference (value = "Device-DeviceGroup")
+   @JsonBackReference (value = "Device-DeviceGroup")
     @OneToMany(mappedBy = "deviceGroup", cascade = {
             CascadeType.ALL
     })
     private Set<Device> devices;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "main_schedule_id")
     private MainSchedule mainSchedule;
 

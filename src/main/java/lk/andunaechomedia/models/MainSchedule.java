@@ -3,11 +3,7 @@ package lk.andunaechomedia.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(
@@ -16,11 +12,11 @@ import javax.persistence.Table;
 public class MainSchedule {
     @Id
     private String scheduleId;
-    private double version;
+    private int version;
     @JsonBackReference("MainScheduleHasFile-MainSchedule")
-    @OneToMany(mappedBy = "mainSchedule", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @OneToMany(mappedBy = "mainSchedule", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private Set<MainSchedulePlayFile> mainSchedulePlayFile;
-    @JsonBackReference("DeviceGroup-MainSchedule")
+   @JsonBackReference("DeviceGroup-MainSchedule")
     @OneToMany(mappedBy = "mainSchedule",cascade = {CascadeType.ALL})
     private Set<DeviceGroup> groups;
 
@@ -28,7 +24,7 @@ public class MainSchedule {
         this.mainSchedulePlayFile = new HashSet();
     }
 
-    public MainSchedule(String scheduleId, double version) {
+    public MainSchedule(String scheduleId, int version) {
         this.scheduleId = scheduleId;
         this.version = version;
         this.mainSchedulePlayFile = new HashSet();
@@ -58,11 +54,11 @@ public class MainSchedule {
         this.scheduleId = schedule_id;
     }
 
-    public double getVersion() {
+    public int getVersion() {
         return this.version;
     }
 
-    public void setVersion(String version) {
-        this.version = Double.parseDouble(version);
+    public void setVersion(int version) {
+        this.version =version;
     }
 }
