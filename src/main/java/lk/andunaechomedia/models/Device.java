@@ -20,28 +20,45 @@ public  class Device implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private String deviceId;
-    private String customerName;
-    private String startPoint;
-    private String endPoint;
-    private String deviceAddress;
-    private String telNumber;
+    private String device_id;
+    private String customer_name;
+    private String start_point;
+    private String end_point;
+    private String device_address;
+    private String tel_number;
+    private  String status;
     Date publishDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "device_group_id")
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "device_group_id", nullable=false)
     private DeviceGroup deviceGroup;
 
     public Device() {
     }
 
-    public Device(String device_id,String customer_name,String start_point, String end_points, String device_address, String tel_number, Date publish_date) {
-        this.setDeviceId(device_id);
-        this.setCustomerName(customer_name);
-        this.setStartPoint(start_point);
-        this.setEndPoint(end_points);
-        this.setDeviceAddress(device_address);
-        this.setTelNumber(tel_number);
+    @Override
+    public String toString() {
+        return "Device{" +
+                "device_id='" + device_id + '\'' +
+                ", customer_name='" + customer_name + '\'' +
+                ", start_point='" + start_point + '\'' +
+                ", end_point='" + end_point + '\'' +
+                ", device_address='" + device_address + '\'' +
+                ", tel_number='" + tel_number + '\'' +
+                ", status='" + status + '\'' +
+                ", publishDate=" + publishDate +
+                ", deviceGroup=" + deviceGroup +
+                '}';
+    }
+
+    public Device(String device_id, String customer_name, String start_point, String end_points, String device_address, String tel_number, Date publish_date) {
+        this.setDevice_id(device_id);
+        this.setCustomer_name(customer_name);
+        this.setStart_point(start_point);
+        this.setEnd_point(end_points);
+        this.setDevice_address(device_address);
+        this.setTel_number(tel_number);
         this.setPublishDate(publish_date);
 
     }

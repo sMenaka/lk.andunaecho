@@ -9,6 +9,6 @@ public class GroupMapper {
         group.setGroupId(groupDto.getGroupId());
         group.setGroupName(groupDto.getName());
 
-        return    group;
+        return group;
     }
 }
