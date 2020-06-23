@@ -3,8 +3,10 @@ package lk.andunaechomedia.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.util.HashSet;
 import java.util.Optional;
 
+import lk.andunaechomedia.dtos.GetVersionDto;
 import lk.andunaechomedia.dtos.SaveScheduleDto;
 import lk.andunaechomedia.models.DeviceGroup;
 import lk.andunaechomedia.models.File;
@@ -12,6 +14,8 @@ import lk.andunaechomedia.models.MainSchedule;
 import lk.andunaechomedia.models.MainSchedulePlayFile;
 import lk.andunaechomedia.repositories.DeviceGroupRepo;
 import lk.andunaechomedia.repositories.FileRepo;
+
+import lk.andunaechomedia.repositories.MainSchedulePlayFileRepo;
 import lk.andunaechomedia.repositories.MainScheduleRepo;
 import lk.andunaechomedia.services.MainScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +23,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MainScheduleController {
     @Autowired
     MainScheduleRepo mainScheduleRepo;
+
+
     @Autowired
     DeviceGroupRepo groupRepo;
     @Autowired
@@ -38,6 +38,10 @@ public class MainScheduleController {
 
     @Autowired
     MainScheduleService scheduleService;
+
+    @Autowired
+    MainSchedulePlayFileRepo mainSchedulePlayFileRepo;
+
 
 
     @RequestMapping(method = {RequestMethod.POST}, path = {"/add/main_schedule"})
@@ -51,6 +55,8 @@ public class MainScheduleController {
 
         DeviceGroup group = groupRepo.getOne(groupid);
         MainSchedule mainSchedule = group.getMainSchedule();
+        mainSchedulePlayFileRepo.deleteByMainSchedule(mainSchedule.getScheduleId());
+
 
 
         try {
@@ -91,5 +97,9 @@ public class MainScheduleController {
     public Optional<MainSchedule> getSchedule(@PathVariable String id) {
         System.out.println(id);
         return this.mainScheduleRepo.findById(id);
+    }
+    @GetMapping("/get/version/{deviceId}")
+    public HttpEntity<GetVersionDto> getMainScheduleVersion(@PathVariable String deviceId){
+       return new  ResponseEntity(scheduleService.getCurrentVersion(deviceId),HttpStatus.ACCEPTED);
     }
 }

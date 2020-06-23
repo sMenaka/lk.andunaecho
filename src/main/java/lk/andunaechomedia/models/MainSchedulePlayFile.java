@@ -3,7 +3,7 @@ package lk.andunaechomedia.models;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
-
+@IdClass(lk.andunaechomedia.models.MainSchedulePlayFile.class)
 @Entity
 @Table(
     name = "main_schedule_play_file"
